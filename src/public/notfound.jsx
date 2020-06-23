@@ -1,13 +1,14 @@
 import React from 'react';
 
-class FluIndex extends React.Component {
+
+class NotFound extends React.Component {
     render() {
         return (
             <div>
-                <a></a>flute
+              <h1>NotFound</h1> 
             </div>
         )
     }
 
 }
-export default FluIndex;
+export default NotFound;

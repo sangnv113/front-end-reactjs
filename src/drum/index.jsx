@@ -1,13 +1,13 @@
 import React from 'react';
 
-class FluIndex extends React.Component {
+class DruIndex extends React.Component {
     render() {
         return (
             <div>
-                <a></a>flute
+                <b>druuu</b>
             </div>
         )
     }
 
 }
-export default FluIndex;
+export default DruIndex;

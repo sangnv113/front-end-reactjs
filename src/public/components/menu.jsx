@@ -1,15 +1,50 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle } from '@fortawesome/fontawesome-free-solid'
-// import '../lib/fontawesome-free-5.13.0-web/css/fontawesome.min.css';
+import { faUserCircle, faHome } from '@fortawesome/fontawesome-free-solid'
+
 import { Button, Navbar, Nav, NavDropdown, Modal, Form } from 'react-bootstrap';
+import {  Route, Switch, Link } from "react-router-dom";
 import '../lib/style.css';
+
+
+const menus =[
+    {
+        name : 'home',
+        to : '/',
+        exact : true
+    },
+    {
+        name : 'flute',
+        to : '/flute',
+        exact : true
+    },
+    {
+        name : 'drum',
+        to : '/drum',
+        exact : true
+    }
+];
+const MenuLink = ({label, to, activeOnlyWhenExact})=> {
+    return(
+        <Route
+        path ={to}
+        exact={activeOnlyWhenExact}
+        children = {({match})=>{
+
+            var active = match ? 'active' : '';
+            return(
+                <li className={active}>
+                    <Link to = {to} className="my-link">{label}</Link>
+                </li>
+            );
+        }}/>
+    )
+}
 
 function LoginModal(props) {
     return (
         <Modal
             {...props}
-           
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -21,10 +56,9 @@ function LoginModal(props) {
             <Modal.Body>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>User name</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="username" placeholder="Enter Username" />
                     </Form.Group>
-
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" />
@@ -41,44 +75,68 @@ function LoginModal(props) {
     );
 }
 
-function Menu() {
-    const [modalShow, setModalShow] = React.useState(false);
 
+
+class Menu extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            modalShow :false
+        }
+       // this.setModalShow= this.setModalShow.bind(this);
+        //this.showMenu= this.showMenu.bind(this);
+    }
+   showMenu (menus){
+        var result =null;
+        result = menus.map((menu, index)=>{
+            return (
+                <MenuLink key ={index}
+                label ={menu.name} to= {menu.to} activeOnlyWhenExact={menu.exact} />
+            )
+    
+        })
+    
+        return result;
+    }
+    setModalShow(show){
+   
+        this.setState({
+            modalShow : show
+        });
+    }
+  render(){
     return (
         <div>
-            
             <LoginModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={this.state.modalShow}
+                onHide={() =>{var show = false; this.setModalShow(show)} }
             />
-
-            <div>
-
-            </div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
-                        <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                    <Nav>
-                        <Nav.Link href="#deets">Dank memes</Nav.Link>
-                        <Nav.Link onClick={() => setModalShow(true)}> <FontAwesomeIcon icon={faUserCircle} />Login </Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-
+                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                    <Navbar.Brand href="#home"> <FontAwesomeIcon icon={faHome} /></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                            {this.showMenu(menus)}
+                            {/*  <MenuLink label ="Home" to= "/" activeOnlyWhenExact={true} />
+                            <MenuLink label ="Flute" to= "/flute" activeOnlyWhenExact={false} />
+                            <MenuLink label ="Drum" to= "/drum" activeOnlyWhenExact={false} />  */}
+                            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Nav.Link href="#deets">Dank memes</Nav.Link>
+                            <Nav.Link onClick={() => this.setModalShow(true)}> <FontAwesomeIcon icon={faUserCircle} />Login </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+                
         </div>
-    );
+    )};
 }
 
 export default Menu;

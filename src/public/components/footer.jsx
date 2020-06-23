@@ -5,11 +5,7 @@ const Footer = () => {
     return (
         <div>
             <div className="fixed-bottom">
-                <Navbar color="dark" dark>
-                    <Container>
-                        <NavbarBrand>Footer</NavbarBrand>
-                    </Container>
-                </Navbar>
+              footer
             </div>
         </div>
     );

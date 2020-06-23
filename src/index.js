@@ -2,15 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Menu from './public/components/menu.jsx';
-import Footer from './public/components/footer.jsx';
 import * as serviceWorker from './serviceWorker';
-
+import App from './App.js'
 
 ReactDOM.render(
   <React.StrictMode>
-   <Menu/>
-        <Footer/>
+    <App/>
+   
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,13 +1,14 @@
 import React from 'react';
 
-class FluIndex extends React.Component {
+
+class Home extends React.Component {
     render() {
         return (
             <div>
-                <a></a>flute
+               home
             </div>
         )
     }
 
 }
-export default FluIndex;
+export default Home;
