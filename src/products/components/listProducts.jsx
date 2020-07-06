@@ -46,7 +46,6 @@ class ListProducts extends React.Component {
                         </thead>
                         <tbody>
                              {this.showProducts(products)}
-
                         </tbody>
                     </Table>
             </div>

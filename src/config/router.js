@@ -1,8 +1,9 @@
 import React from 'react'
-import DruIndex from '../drum/index';
-import FluShow from '../flute/show';
+import CloShow from '../color/show';
+import FluShow from '../products/show';
 import Home from '../public/home';
 import NotFound from '../public/notfound';
+import EditColor from '../color/components/edit';
 
 const routers = [
     {
@@ -16,9 +17,14 @@ const routers = [
         main: () => <FluShow />
     },
     {
-        path: '/drum',
+        path: '/color',
         exact: true,
-        main: () => <DruIndex />
+        main: () => <CloShow />
+    },
+    {
+        path: '/color/edit/:id',
+        exact: true,
+        main: ({match, history}) => <EditColor match = {match} history={history} />
     },
     {
         path: '',

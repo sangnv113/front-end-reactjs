@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ListProducts from '../public/components/ListProducts'
+import ListProducts from './components/listProducts'
 import callAPI from '../config/apiCaller'
 
 class FluShow extends React.Component {

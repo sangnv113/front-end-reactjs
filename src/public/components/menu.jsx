@@ -19,8 +19,8 @@ const menus =[
         exact : true
     },
     {
-        name : 'drum',
-        to : '/drum',
+        name : 'color',
+        to : '/color',
         exact : true
     }
 ];
