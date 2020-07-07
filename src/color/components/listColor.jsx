@@ -6,7 +6,7 @@ import EditModal from './editModal'
 
 class ListColors extends React.Component {
 
-    showcolors(colors) {
+    showColors(colors) {
         var result = null;
         if (colors.length) {
             result = colors.map((color, index) => {
@@ -15,8 +15,8 @@ class ListColors extends React.Component {
                         <td >{color.id}</td>
                         <td >{color.name}</td> 
                         <td >  
-                           <Link to = {`/color/edit/${color.id}`} className="">Edit</Link> 
-                            {/* <Button onClick={()=>{var id= color.id; this.onEdit(id)}}>Edit</Button> */}
+                           {/* <Link to = {`/color/edit/${color.id}`} className="">Edit</Link>  */}
+                             <Button onClick={()=>{var id= color.id; this.onEdit(id)}}>Edit</Button> 
                         <Button onClick={()=>{var id= color.id; this.onDelete(id)}}>Delete</Button></td> 
                     </tr>
                 )
@@ -31,10 +31,7 @@ class ListColors extends React.Component {
         })
     }
     onEdit(id){
-        // callAPI(`/adcolor/${id}/delete`, 'POST', null).then(res => {
-        //     window.location.reload(false);
-        //     console.log(res.data);
-        // })
+        this.props.setFlagShowModal(true, id);
     }
     render() {
         var colors = this.props.colors;
@@ -50,7 +47,7 @@ class ListColors extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                             {this.showcolors(colors)}
+                             {this.showColors(colors)}
                         </tbody>
                     </Table>
             </div>

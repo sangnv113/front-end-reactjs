@@ -6,8 +6,15 @@ class EditModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: this.props.show,
-            txtColorName: ''
+            txtNameColor : ''
+        }
+    }
+    componentDidUpdate(prevProps, prevState){
+        console.log("getSnapshotBeforeUpdate");
+        if(this.props.idColor!=prevProps.idColor){
+            this.setState({
+                txtNameColor: this.props.nameColor
+            })
         }
     }
     onChange = (e) => {
@@ -19,54 +26,48 @@ class EditModal extends React.Component {
         })
     }
     onSave = (e) => {
-        console.log("asdsd:" + this.state.txtColorName);
+        console.log("onSave");
         e.preventDefault();
         callAPI('adcolor/save', 'POST', {
-            name: this.state.txtColorName
+            name: this.state.txtNameColor,
+            id: this.props.idColor
         }).then(res => {
-            window.location.reload(false);
+             window.location.reload(false);
             console.log(res.data);
         }
         )
     }
-    static getDerivedStateFromProps(nextProps, prevState) {
-        console.log("getDerivedStateFromProps");
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.show !== this.props.show) {
-            console.log("componentDidUpdate:");
-            this.setState(
-                {
-                    show: true
-                });
-        }
-    }
     onHide = () => {
-        console.log("onHide");
-        var show = false;
-        this.setState({
-            show: show
-        });
+        this.props.setFlagShowModal(false, this.props.idColor)
     }
+    showTitle(){
+        var result = null;
+        if(this.props.idColor){
+            result='Edit'
+        }else{
+            result='Add'
+        }
+        return result;
+    }
+   
     render() {
         return (
             <div>
                 <Modal
-                    show={this.state.show} onHide={this.onHide}
-                    aria-labelledby="contained-modal-title-vcenter"
+                    show={this.props.show} onHide={this.onHide}
+                    aria-labelledby="  contained-modal-title-vcenter"
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-vcenter">
-                            Add color
+                        <Modal.Title id="contained-modal-title-vcenter" >
+                            {this.showTitle()}
           </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form onSubmit={this.onSave}>
                             <Form.Group>
-                                <Form.Control type="text" placeholder="Enter color" name="txtColorName"
-                                    onChange={this.onChange} />
+                                <Form.Control type="text" placeholder="Enter color" name="txtNameColor"
+                                  value={this.state.txtNameColor}  onChange={this.onChange} />
                             </Form.Group>
                             <Form.Group>
                                 <Button variant="primary" type="submit" > Submit  </Button>

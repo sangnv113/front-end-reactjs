@@ -10,8 +10,12 @@ class CloShow extends React.Component {
         // this.wrapper = React.createRef();
         this.state = {
             colors: [],
-            modalShow: false
+            modalShow: false,
+            idColor: '',
+            nameColor: ''
+
         }
+        this.setShowModal = this.setShowModal.bind(this);
     }
     componentDidMount() {
         callAPI('adcolor', 'GET', null).then(
@@ -22,24 +26,39 @@ class CloShow extends React.Component {
             }
         )
     }
-    setModalShow() {
-        if(this.state.modalShow){
-            this.setState({
-                modalShow: false
-            });
+    setShowModal(flag, id) {
+        if (id && flag && id != this.state.idColor) {
+            callAPI(`adcolor/${id}`, 'GET', null)
+                .then(res => {
+                    var data = res.data;
+                    this.setState({
+                        nameColor: data.name,
+                        idColor: id,
+                        modalShow: flag
+                    })
+                })
+                return;
         }else{
             this.setState({
-                modalShow: true
-            });
+                idColor: id,
+                nameColor:'',
+                modalShow: flag
+            })
         }
-        
     }
     render() {
         return (
             <div>
-                <ListColors colors={this.state.colors} />
-                <EditModal ref={this.wrapper} show={this.state.modalShow} />
-                <Button onClick={() => this.setModalShow()}>Add</Button>
+                <ListColors 
+                setFlagShowModal={this.setShowModal} 
+                colors={this.state.colors} />
+                <EditModal 
+                setFlagShowModal={this.setShowModal}
+                 show={this.state.modalShow} 
+                 idColor={this.state.idColor}
+                 nameColor ={this.state.nameColor}
+                  />
+                <Button onClick={() => this.setShowModal(true, null)}>Add</Button>
             </div>
         )
     }
