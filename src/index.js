@@ -5,10 +5,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App.js'
 
+//store
+import {createStore } from 'redux'
+import myReducer from './reducers/index'
+import { Provider } from 'react-redux'
+const store = createStore(myReducer);
+
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App/>
-   
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

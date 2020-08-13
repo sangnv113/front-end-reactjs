@@ -1,6 +1,6 @@
 import React from 'react';
 import callAPI from '../../config/apiCaller'
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 

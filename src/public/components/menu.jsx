@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle, faHome } from '@fortawesome/fontawesome-free-solid'
 
 import { Button, Navbar, Nav, NavDropdown, Modal, Form } from 'react-bootstrap';
-import {  Route, Switch, Link } from "react-router-dom";
+import {  Route,  Link } from "react-router-dom";
 import '../lib/style.css';
 
 
@@ -75,8 +75,6 @@ function LoginModal(props) {
     );
 }
 
-
-
 class Menu extends React.Component {
     constructor(props){
         super(props);
@@ -134,7 +132,6 @@ class Menu extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                
         </div>
     )};
 }

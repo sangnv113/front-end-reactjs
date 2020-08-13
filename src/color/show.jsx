@@ -2,7 +2,7 @@ import React from 'react';
 import callAPI from '../config/apiCaller'
 import ListColors from '../color/components/listColor'
 import EditModal from './components/editModal'
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class CloShow extends React.Component {
     constructor(props) {
